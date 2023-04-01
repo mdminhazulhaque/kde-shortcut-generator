@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Md. Minhazul Haque" />
+    <meta name="description" content="kde-shortcut-generator" />
+    <title>kde-shortcut-generator</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico?t=2023">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: SolaimanLipi, sans-serif;
+            padding: 20px;
+            padding-top: 0px;
+        }        
+        textarea {
+            height: auto !important;
+            width: 50%;
+            font-size: 16px;
+            padding: 15px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $("#input").on("change paste keyup", function() {
+                var str = $(this).val(); 
+                const KEYBOARD_ROWS_NORMAL = "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./";
+                const KEYBOARD_ROWS_SHIFT = "~!@#$%^&*()_+QWERTYUIOP\\{\\}|ASDFGHJKL:\"ZXCVBNM<>?";
+                var keys = [];
+                for (var i = 0; i < str.length; i++) {
+                    if (KEYBOARD_ROWS_SHIFT.includes(str[i])) {
+                        keys.push("SHIFT+"+str[i]);
+                    } else if (KEYBOARD_ROWS_NORMAL.includes(str[i])) {
+                        keys.push(str[i]);
+                    }
+                }
+                $("#output").val(keys.join(":"));
+            });
+            $('#input').focus();
+        });
+    </script>
+</head>
+<body>
+    <h1>KDE Shortcut Generator</h1>
+    <form class="pure-form">
+        <input id="input" placeholder="Example String">
+        <br><br>
+        <textarea id="output" readonly placeholder="Shortcut String"></textarea>
+    </form>
+    <br>
+    <a target="_blank" href="https://github.com/mdminhazulhaque/kde-shortcut-generator">
+        <button class="pure-button"><img src="https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/svg/mark-github.svg"> mdminhazulhaque/kde-shortcut-generator</button>
+    </a>
+</body>
+</html>
